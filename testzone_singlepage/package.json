@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "parcel *.html *.js *.scss",
+    "build": "parcel build *.html *.js *.scss --out-dir ./build --no-cache --detailed-report --experimental-scope-hoisting"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4",
+    "sass": "^1.30.0"
+  }
+}
