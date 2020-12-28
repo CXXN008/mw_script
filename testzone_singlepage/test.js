@@ -1,14 +1,12 @@
-const com_prefix = './'
-const name_fix = {
-	'-': '_',
-	// 'mwcom-': '',
-}
+const com_prefix = '//'
+
 // what components do we need
 const coms = document.querySelectorAll('[id^=mwcom]')
 
-// dynamic load resource
 for (const c of coms) {
+	//  load js
 	let script = document.createElement('script')
+
 	script.type = 'text/javascript'
 	script.src =
 		// `${com_prefix}${c.id.replace(
@@ -16,7 +14,16 @@ for (const c of coms) {
 		// 	(m) => name_fix[m]
 		// )}.js`
 		`${com_prefix}${c.id.replaceAll('-', '_')}.js`
+
 	document.head.appendChild(script)
+
+	if (eval(c.getAttribute('mwstyle'))) {
+		//  load css if need
+		let link = document.createElement('link')
+		link.rel = 'stylesheet'
+		link.href = `${com_prefix}${c.id.replaceAll('-', '_')}.css`
+		document.head.appendChild(link)
+	}
 }
 
 // let script = document.createElement('script')

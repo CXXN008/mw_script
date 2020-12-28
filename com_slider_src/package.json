@@ -1,0 +1,13 @@
+{
+  "name": "mwcom_slider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "rm -rf ./build && parcel build index.html --out-dir ./build --no-cache --detailed-report --experimental-scope-hoisting&& cp ./build/*.js ../release/%npm_package_name%.js && cp ./build/*.css ../release/%npm_package_name%.css"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
+}
