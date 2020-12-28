@@ -1,4 +1,4 @@
-const com_prefix = '//'
+const com_prefix = './'
 
 // what components do we need
 const coms = document.querySelectorAll('[id^=mwcom]')
