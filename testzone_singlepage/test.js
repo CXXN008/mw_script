@@ -12,7 +12,7 @@ for (const c of coms) {
 	script.type = 'text/javascript'
 	script.src = `${com_prefix}${c.id.replace(
 		/mwcom-|-/g,
-		(m) => name_fix[m]
+		(m) => name_fix[m] 
 	)}.js`
 	document.head.appendChild(script)
 }
