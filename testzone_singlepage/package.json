@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "parcel *.html *.js *.scss",
-    "build": "rm -rf ./inner_build && parcel build *.html *.js *.scss --out-dir ./inner_build --no-cache --detailed-report --experimental-scope-hoisting && cp ./inner_build/mwcom*.js ../release/"
+    "build": "rm -rf ./inner_build && parcel build index.html --out-dir ./inner_build --no-cache --detailed-report --experimental-scope-hoisting"
   },
   "devDependencies": {
     "parcel": "^1.12.4",
