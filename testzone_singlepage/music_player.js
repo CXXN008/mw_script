@@ -1,5 +1,6 @@
 // init
-const com = document.querySelector('#mwmaho-music-player')
+console.log('music player loaded ...')
+const com = document.querySelector('#mwcom-music-player')
 const a_src = document.querySelector('source').src
 
 // modified from https://codepen.io/jhereg00/pen/WjQPdW
@@ -50,54 +51,51 @@ let DEFAULTS = {
 }
 
 // reused values
-let pi = Math.PI
-let doublePi = pi * 2
-let arcOffset = -pi / 2
-let animTime = 200
-let loaderTime = 1800
+const pi = Math.PI
+const doublePi = pi * 2
+const arcOffset = -pi / 2
+const animTime = 200
+const loaderTime = 1800
 
-let CircleAudioPlayer = function (options) {
-	options = options || {}
-	for (let property in DEFAULTS) {
-		this[property] = options[property] || DEFAULTS[property]
-	}
+class CircleAudioPlayer {
+	constructor(options) {
+		options = options || {}
+		for (let property in DEFAULTS) {
+			this[property] = options[property] || DEFAULTS[property]
+		}
 
-	// create some things we need
-	this._canvas = document.createElement('canvas')
-	this._canvas.setAttribute('class', this.className + ' is-loading')
-	this._canvas.addEventListener(
-		'mousedown',
-		function () {
-			if (this.playing) {
-				this.pause()
-			} else {
-				this.play()
+		// create some things we need
+		this._canvas = document.createElement('canvas')
+		this._canvas.setAttribute('class', this.className + ' is-loading')
+		this._canvas.addEventListener(
+			'mousedown',
+			function () {
+				if (this.playing) {
+					this.pause()
+				} else {
+					this.play()
+				}
+			}.bind(this)
+		)
+		this._ctx = this._canvas.getContext('2d')
+
+		// set up initial stuff
+		this.setAudio(options.audio)
+		this.setSize(this.size); (function cAPAnimationLoop(now) {
+			// check if we need to update anything
+			if (this.animating) {
+				this._updateAnimations(now)
 			}
-		}.bind(this)
-	)
-	this._ctx = this._canvas.getContext('2d')
+			if (this._forceDraw || this.playing || this.animating || this.loading) {
+				this._draw()
+				this._forceDraw = false
+			}
 
-	// set up initial stuff
-	this.setAudio(options.audio)
-	this.setSize(this.size)
-
-	// redraw loop
-	;(function cAPAnimationLoop(now) {
-		// check if we need to update anything
-		if (this.animating) {
-			this._updateAnimations(now)
-		}
-		if (this._forceDraw || this.playing || this.animating || this.loading) {
-			this._draw()
-			this._forceDraw = false
-		}
-
-		requestAnimationFrame(cAPAnimationLoop.bind(this))
-	}.call(this, new Date().getTime()))
-}
-CircleAudioPlayer.prototype = {
+			requestAnimationFrame(cAPAnimationLoop.bind(this))
+		}.call(this, new Date().getTime()))
+	}
 	// private methods
-	_animateIcon: function (to, from) {
+	_animateIcon(to, from) {
 		// define a few things the first time
 		this._animationProps = {
 			animStart: null,
@@ -110,17 +108,15 @@ CircleAudioPlayer.prototype = {
 			this._animationProps.current = this._icons[to].slice()
 			this.draw()
 		}
-	},
-	_updateAnimations: function (now) {
+	}
+	_updateAnimations(now) {
 		this._animationProps.animStart = this._animationProps.animStart || now
 		let deltaTime = now - this._animationProps.animStart
 		let perc = 1 - Math.cos(((deltaTime / animTime) * pi) / 2)
 		if (deltaTime >= animTime) {
 			this.animating = false
 			perc = 1
-			this._animationProps.current = this._icons[
-				this._animationProps.to
-			].slice()
+			this._animationProps.current = this._icons[this._animationProps.to].slice()
 			this.draw()
 		} else {
 			let from = this._icons[this._animationProps.from]
@@ -138,8 +134,8 @@ CircleAudioPlayer.prototype = {
 			}
 			this._animationProps.current = current
 		}
-	},
-	_draw: function (progress) {
+	}
+	_draw(progress) {
 		// common settings
 		if (isNaN(progress)) {
 			progress = this.audio.currentTime / this.audio.duration || 0
@@ -184,11 +180,10 @@ CircleAudioPlayer.prototype = {
 		// icons
 		this._ctx.fillStyle = this.iconColor
 		if (this.loading) {
-			let loaderOffset =
-				-Math.cos(
-					((new Date().getTime() % loaderTime) / loaderTime) * pi
-				) *
-					doublePi -
+			let loaderOffset = -Math.cos(
+				((new Date().getTime() % loaderTime) / loaderTime) * pi
+			) *
+				doublePi -
 				pi / 3 -
 				pi / 2
 			this._ctx.beginPath()
@@ -203,8 +198,7 @@ CircleAudioPlayer.prototype = {
 			this._ctx.stroke()
 		} else {
 			this._ctx.beginPath()
-			let icon =
-				(this._animationProps && this._animationProps.current) ||
+			let icon = (this._animationProps && this._animationProps.current) ||
 				this._icons.play
 			for (let i = 0; i < icon.length; i++) {
 				this._ctx.moveTo(icon[i][0][0], icon[i][0][1])
@@ -222,8 +216,8 @@ CircleAudioPlayer.prototype = {
 			this._ctx.lineJoin = 'miter'
 			this._ctx.stroke()
 		}
-	},
-	_setState: function (state) {
+	}
+	_setState(state) {
 		this.playing = false
 		this.loading = false
 		if (state === 'playing') {
@@ -239,12 +233,12 @@ CircleAudioPlayer.prototype = {
 		this.state = state
 		this._canvas.setAttribute('class', this.className + ' is-' + state)
 		this.draw()
-	},
+	}
 	// public methods
-	draw: function () {
+	draw() {
 		this._forceDraw = true
-	},
-	setSize: function (size) {
+	}
+	setSize(size) {
 		this.size = size
 		this._halfSize = size / 2 // we do this a lot. it's not heavy, but why repeat?
 		this._canvas.width = size
@@ -296,8 +290,8 @@ CircleAudioPlayer.prototype = {
 		if (!this.playing) {
 			this.draw()
 		}
-	},
-	setAudio: function (audioUrl) {
+	}
+	setAudio(audioUrl) {
 		this.audio = new Audio(audioUrl)
 		this._setState('loading')
 
@@ -323,16 +317,16 @@ CircleAudioPlayer.prototype = {
 				this._setState('paused')
 			}.bind(this)
 		)
-	},
-	appendTo: function (element) {
+	}
+	appendTo(element) {
 		element.appendChild(this._canvas)
-	},
-	play: function () {
+	}
+	play() {
 		this.audio.play()
-	},
-	pause: function () {
+	}
+	pause() {
 		this.audio.pause()
-	},
+	}
 }
 
 // now init one as an example

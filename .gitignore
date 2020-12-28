@@ -109,3 +109,6 @@ dist
 
 # backup file
 *.bak
+
+# testassets
+testassets/
