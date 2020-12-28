@@ -4,7 +4,7 @@ import Swiper from './swiper-bundle'
 // import Swiper styles
 import './swiper-bundle.css'
 
-let com = document.querySelector('#mwcom-slider')
+let com = document.querySelector('#mwcom-slider-c')
 
 // construct a swiper
 let s_container = document.createElement('div')

@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "scripts": {
-    "dev": "parcel *.html *.js *.scss",
+    "dev": "parcel *.html *.js *.css",
     "build": "rm -rf ./inner_build && parcel build index.html --out-dir ./inner_build --no-cache --detailed-report --experimental-scope-hoisting"
   },
   "devDependencies": {

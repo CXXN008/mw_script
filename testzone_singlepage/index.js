@@ -1,8 +1,8 @@
-const com_prefix = '//cdn.jsdelivr.net/gh/cccccccccccccccccccccccccccccccccccccc/mw_script@latest/release/'
+const com_prefix = './'
+// '//cdn.jsdelivr.net/gh/cccccccccccccccccccccccccccccccccccccc/mw_script@latest/release/'
 
 // what components do we need
 const coms = document.querySelectorAll('[id^=mwcom]')
-
 for (const c of coms) {
 	//  load js
 	let script = document.createElement('script')
@@ -16,12 +16,12 @@ for (const c of coms) {
 		`${com_prefix}${c.id.replaceAll('-', '_')}.js`
 
 	document.head.appendChild(script)
-
-	if (eval(c.getAttribute('mwstyle'))) {
+	if (c.id.endsWith('-c')) {
 		//  load css if need
 		let link = document.createElement('link')
 		link.rel = 'stylesheet'
 		link.href = `${com_prefix}${c.id.replaceAll('-', '_')}.css`
+		console.log(link)
 		document.head.appendChild(link)
 	}
 }
