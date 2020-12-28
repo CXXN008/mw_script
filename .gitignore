@@ -111,4 +111,5 @@ dist
 *.bak
 
 # testassets
-testassets/
+/testassets
+

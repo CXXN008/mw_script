@@ -2,13 +2,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "parcel *.html *.js *.scss",
-    "build": "parcel build *.html *.js *.scss --out-dir ./build --no-cache --detailed-report --experimental-scope-hoisting"
+    "build": "parcel build *.html *.js *.scss --out-dir ./build --no-cache --detailed-report --experimental-scope-hoisting && cp ./build/mwcom*.js ../release/"
   },
   "devDependencies": {
     "parcel": "^1.12.4",
     "sass": "^1.30.0"
-  },
-  "dependencies": {
-    "ci": "^1.0.0"
   }
 }

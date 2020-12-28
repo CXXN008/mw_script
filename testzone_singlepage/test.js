@@ -1,7 +1,7 @@
 const com_prefix = './'
 const name_fix = {
 	'-': '_',
-	'mwcom-': '',
+	// 'mwcom-': '',
 }
 // what components do we need
 const coms = document.querySelectorAll('[id^=mwcom]')
@@ -10,12 +10,13 @@ const coms = document.querySelectorAll('[id^=mwcom]')
 for (const c of coms) {
 	let script = document.createElement('script')
 	script.type = 'text/javascript'
-	script.src = `${com_prefix}${c.id.replace(
-		/mwcom-|-/g,
-		(m) => name_fix[m] 
-	)}.js`
+	script.src =
+		// `${com_prefix}${c.id.replace(
+		// 	/mwcom-|-/g,
+		// 	(m) => name_fix[m]
+		// )}.js`
+		`${com_prefix}${c.id.replaceAll('-', '_')}.js`
 	document.head.appendChild(script)
-	console.log('test');
 }
 
 // let script = document.createElement('script')
