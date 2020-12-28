@@ -14,7 +14,7 @@ for (const c of coms) {
 		/mwcom-|-/g,
 		(m) => name_fix[m] 
 	)}.js`
-	document.head.appendChild(script)
+	document.head.appendChild(script) 
 }
 
 // let script = document.createElement('script')
