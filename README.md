@@ -6,4 +6,4 @@ working..
 
 ## cdn usage
 
-https://cdn.jsdelivr.net/gh/cccccccccccccccccccccccccccccccccccccc/mw_script@version/release/
+https://cdn.jsdelivr.net/gh/cccccccccccccccccccccccccccccccccccccc/mw_script@latest/release/
