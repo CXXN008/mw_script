@@ -7,6 +7,12 @@
 
 		<script defer src="./index.js"></script>
 	</head>
+	<style>
+				[id^='mwcom-'] {
+			display: none;
+		}
+
+	</style>
 	<body>
 		<div
 			id="mw-content-text"
@@ -16,7 +22,14 @@
 		>
 			<div class="mw-parser-output">
 				<p><strong>All test here&nbsp;!</strong></p>
-				<div id="mwcom-music-player"><a href="./testassets/Ms.mp3" class="internal" title="FloralLife.ogg">Media:FloralLife.ogg</a></div>
+				<div id="mwcom-music-player">
+					<a
+						href="./testassets/Ms.mp3"
+						class="internal"
+						title="FloralLife.ogg"
+						>Media:FloralLife.ogg</a
+					>
+				</div>
 				<p>
 					<br />
 					timed
@@ -57,40 +70,27 @@
 							width="224"
 							height="246"
 					/></a>
-					mwcom-config:({
-						global: { height: '400px', play_delay: 3000 },
-						img: [
-							{
-								title: 'title here',
-								text: 'text description............',
-								href: '//www.baidu.com',
-							},
-							{
-								title: 'title here',
-								text: 'text description............',
-								href: '//www.baidu.com',
-							},
-							{
-								title: 'title here',
-								text: 'text description............',
-								href: '//www.baidu.com',
-							},
-						],
-					})
+					mwcom-config:({ global: { height: '400px', play_delay: 3000
+					}, img: [ { title: 'title here', text: 'text
+					description............', href: '//www.baidu.com', }, {
+					title: 'title here', text: 'text description............',
+					href: '//www.baidu.com', }, { title: 'title here', text:
+					'text description............', href: '//www.baidu.com', },
+					], })
 				</div>
-
 
 				<div>
 					1232131313131
 					<div id="mwcom-black-quote">
-						mwcom-config:({ background_color:'#000000',
-						text_color:'#ffffff', animation_duration:.5 })
+						mwcom-config:({
+							background_color:'#000000',
+							text_color:'#ffffff', 
+							animation_duration:.3 
+						})
 					</div>
-		
 					&lt;black-quote&gt;奥术大师是撒打算打算&lt;/black-quote&gt;
 				</div>
 				2132131321
-
 			</div>
 		</div>
 	</body>
