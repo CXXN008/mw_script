@@ -1,4 +1,5 @@
-const com_prefix = './'
+const com_prefix = 
+'./'
 // '//cdn.jsdelivr.net/gh/cccccccccccccccccccccccccccccccccccccc/mw_script@latest/release/'
 
 // what components do we need
@@ -13,14 +14,14 @@ for (const c of coms) {
 		// 	/mwcom-|-/g,
 		// 	(m) => name_fix[m]
 		// )}.js`
-		`${com_prefix}${c.id.replaceAll('-', '_')}.js`
+		`${com_prefix}${c.id.toString().replace(/-/g, '_')}.js`
 
 	document.head.appendChild(script)
 	if (c.id.endsWith('-c')) {
 		//  load css if need
 		let link = document.createElement('link')
 		link.rel = 'stylesheet'
-		link.href = `${com_prefix}${c.id.replaceAll('-', '_')}.css`
+		link.href = `${com_prefix}${c.id.replace(/-/g, '_')}.css`
 		console.log(link)
 		document.head.appendChild(link)
 	}

@@ -1,0 +1,31 @@
+html,
+body {
+	height: 100%;
+}
+
+.swiper-slide {
+	background-size: cover;
+	background-position: center;
+}
+
+.gallery-top {
+	height: 100%;
+}
+
+#s-div {
+	padding: 0;
+	background-color: #00000055;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: left;
+	padding-left: 10px;
+	transition: 0.2s;
+    transform: translateY(100%);
+    
+}
+.gallery-top:hover #s-div {
+	transition: 0.2s;
+	transform: translateY(0);
+}

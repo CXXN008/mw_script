@@ -8,6 +8,7 @@
     "build": "rm -rf ./inner_build && parcel build index.html --out-dir ./inner_build --no-cache --detailed-report --experimental-scope-hoisting && cp ./inner_build/*.js ../release/%npm_package_name%.js && cp ./inner_build/*.css ../release/%npm_package_name%.css && cp ./inner_build/*.js ../testzone_singlepage/%npm_package_name%.js && cp ./inner_build/*.css ../testzone_singlepage/%npm_package_name%.css"
   },
   "devDependencies": {
-    "cssnano": "^4.1.10"
+    "cssnano": "^4.1.10",
+    "sass": "^1.32.0"
   }
 }
