@@ -18,6 +18,6 @@ style.innerHTML = `
 }
 `
 document.head.append(style)
-document.body.innerHTML = document.body.innerHTML.replace(/<black-quote>/g,'<span class=\'black-quote\'>')
-document.body.innerHTML = document.body.innerHTML.replace(/<\/black-quote>/g,'</span>')
+document.body.innerHTML = document.body.innerHTML.replace(/&lt;black-quote&gt;/g,'<span class=\'black-quote\'>')
+document.body.innerHTML = document.body.innerHTML.replace(/&lt;\/black-quote&gt;/g,'</span>')
 
