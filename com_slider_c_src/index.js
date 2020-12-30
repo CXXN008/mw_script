@@ -8,8 +8,9 @@ import './slider-ex.scss'
 let com = document.querySelector('#mwcom-slider-c')
 com.style.display = 'inline'
 let params = {}
-if (com.innerText.search('mwcom-config:')) {
-	params = eval(com.innerText.replace('mwcom-config:', ''))
+if (com.innerText.search('mwcom-config:') > 0) {
+	params = eval(com.innerText.replace(/.+mwcom-config:/g, ''))
+	console.log(params)
 }
 
 // construct a swiper
@@ -57,7 +58,7 @@ for (let i = 0; i < s_img.length; i++) {
 	s_div.append(s_title)
 	s_div.append(s_text)
 	s_slide_top.append(s_div)
-	
+
 	let img = document.createElement('img')
 	img.style.height = '100%'
 	img.style.width = '100%'
@@ -109,4 +110,3 @@ var galleryTop = new Swiper('.gallery-top', {
 		delay: params['global']['play_delay'],
 	},
 })
-

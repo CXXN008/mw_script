@@ -1,0 +1,15 @@
+{
+  "name": "mwcom_music_player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mwcom_music_player.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "rm -rf ./inner_build && parcel build index.html --out-dir ./inner_build --no-cache --detailed-report --experimental-scope-hoisting && cp ./inner_build/*.js ../release/%npm_package_name%.js && cp ./inner_build/*.js ../testzone_singlepage/%npm_package_name%.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^1.12.4"
+  }
+}

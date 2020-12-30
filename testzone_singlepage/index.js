@@ -22,7 +22,6 @@ for (const c of coms) {
 		let link = document.createElement('link')
 		link.rel = 'stylesheet'
 		link.href = `${com_prefix}${c.id.replace(/-/g, '_')}.css`
-		console.log(link)
 		document.head.appendChild(link)
 	}
 }
