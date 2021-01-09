@@ -2,7 +2,6 @@ let com = document.querySelector('#mwcom-black-quote')
 let params = {}
 if (com.innerText.search('mwcom-config:') > 0) {
     params = eval(com.innerText.replace(/.+mwcom-config:/g, ''))
-    console.log(params);
 }
 let style = document.createElement('style')
 // <a>tag 特殊处理，其他一律按配置颜色来
@@ -22,7 +21,6 @@ style.innerHTML = `
     color: #03A9F4;
 }
 `
-console.log(style);
 // apply style
 document.head.append(style)
 
