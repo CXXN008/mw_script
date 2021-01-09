@@ -98,15 +98,15 @@ com.innerHTML = w_gallery.outerHTML
 
 // init
 
-var galleryTop = new Swiper('.gallery-top', {
+new Swiper('.gallery-top', {
 	spaceBetween: 10,
 	loop: true,
-	loopedSlides: 3, //looped slides should be the same
 	navigation: {
 		nextEl: '.swiper-button-next',
 		prevEl: '.swiper-button-prev',
 	},
 	autoplay: {
 		delay: params['global']['play_delay'],
+		disableOnInteraction: false,
 	},
 })
