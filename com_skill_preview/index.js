@@ -176,6 +176,8 @@ let a = document.querySelectorAll('img[width="32"]')
 let currentSignal = {}
 
 for (const e of a) {
+	e.parentNode.setAttribute('h-title',e.parentNode.title)
+	e.parentNode.removeAttribute('title')
 	e.addEventListener('mouseleave', () => {
 		currentSignal.abort()
 	})
@@ -184,7 +186,8 @@ for (const e of a) {
 		const controller = new AbortController()
 		const signal = controller.signal
 		currentSignal = controller
-		nhpup.popup(`<img src=${ele.target.src}></img><b>${ele.target.parentNode.title}<br/></b><span><br/></span><hr/><span>Loading ...</span>`)
+
+		nhpup.popup(`<img src=${ele.target.src}></img><b>${ele.target.parentNode.getAttribute('h-title')}<br/></b><span><br/></span><hr/><span>Loading ...</span>`)
 		const link = ele.target.parentNode.href.split('/')
 		const pageName = decodeURI(link[link.length - 1])
 		const data = {
