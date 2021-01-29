@@ -177,7 +177,7 @@ let currentSignal = {}
 
 for (const e of a) {
 	// exclude info box image
-	if(e.parentNode.parentNode.parentNode.className !== 'infobox-image'){
+	if(e.parentNode.parentNode.className !== 'infobox-image'){
 		e.parentNode.setAttribute('h-title',e.parentNode.title)
 		e.parentNode.removeAttribute('title')
 		e.addEventListener('mouseleave', () => {
