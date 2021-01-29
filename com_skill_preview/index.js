@@ -8,7 +8,7 @@ style.innerHTML = `
 	width: 250px;
 	border: 1px solid white;
 	color: white;
-	background-color: #00000088;
+	background-color: #000000c0;
 	font-size: 0.95em;
 	border-radius:10px;
 	text-align: top;
@@ -176,65 +176,68 @@ let a = document.querySelectorAll('img[width="32"]')
 let currentSignal = {}
 
 for (const e of a) {
-	e.parentNode.setAttribute('h-title',e.parentNode.title)
-	e.parentNode.removeAttribute('title')
-	e.addEventListener('mouseleave', () => {
-		currentSignal.abort()
-	})
-
-	e.addEventListener('mouseover', (ele) => {
-		const controller = new AbortController()
-		const signal = controller.signal
-		currentSignal = controller
-
-		nhpup.popup(`<img src=${ele.target.src}></img><b>${ele.target.parentNode.getAttribute('h-title')}<br/></b><span><br/></span><hr/><span>Loading ...</span>`)
-		const link = ele.target.parentNode.href.split('/')
-		const pageName = decodeURI(link[link.length - 1])
-		const data = {
-			action: 'parse',
-			page: pageName,
-			prop: 'text',
-			format: 'json',
-			formatversion: '2',
-		}
-
-		const formData = new FormData()
-		for (const name in data) {
-			formData.append(name, data[name])
-		}
-
-		fetch('//nga.wiki/mediawiki-1.34.2/api.php', {
-			signal,
-			body: formData,
-			method: 'POST',
+	// exclude info box image
+	if(e.parentNode.parentNode.parentNode.className !== 'infobox-image'){
+		e.parentNode.setAttribute('h-title',e.parentNode.title)
+		e.parentNode.removeAttribute('title')
+		e.addEventListener('mouseleave', () => {
+			currentSignal.abort()
 		})
-			.then((response) => {
-				// reject on network failure or if anything prevented the request from completing.
-				// won’t reject on HTTP error status even if the response is an HTTP 404 or 500,
-				// it will resolve normally (with ok status set to false)
-				if (response.status >= 200 && response.status < 300) {
-					return Promise.resolve(response)
-				}
-
-				return Promise.reject(new Error(response.statusText))
+	
+		e.addEventListener('mouseover', (ele) => {
+			const controller = new AbortController()
+			const signal = controller.signal
+			currentSignal = controller
+	
+			nhpup.popup(`<img src=${ele.target.src}></img><b>${ele.target.parentNode.getAttribute('h-title')}<br/></b><span><br/></span><hr/><span>Loading ...</span>`)
+			const link = ele.target.parentNode.href.split('/')
+			const pageName = decodeURI(link[link.length - 1])
+			const data = {
+				action: 'parse',
+				page: pageName,
+				prop: 'text',
+				format: 'json',
+				formatversion: '2',
+			}
+	
+			const formData = new FormData()
+			for (const name in data) {
+				formData.append(name, data[name])
+			}
+	
+			fetch('//nga.wiki/mediawiki-1.34.2/api.php', {
+				signal,
+				body: formData,
+				method: 'POST',
 			})
-			.then((response) => response.json()) // parses response to JSON
-			.then((result) => {
-				let tempDiv = document.createElement('div')
-				tempDiv.innerHTML = result['parse']['text']
-				const skillInfo = tempDiv.querySelectorAll('th+td')
-				const spans = document.querySelectorAll('.pup>span')
-				spans[0].innerText = skillInfo[0].innerText
-				spans[1].innerText = skillInfo[1].innerText
-			})
-			.catch((error) => {
-				// common error
-				if (error.name === 'AbortError') {
-					console.warn(`mouseleave --- cancel current request`)
-				}else{
-					console.log(`something wrong${error}`);
-				}
-				return null
-			})
-	})
+				.then((response) => {
+					// reject on network failure or if anything prevented the request from completing.
+					// won’t reject on HTTP error status even if the response is an HTTP 404 or 500,
+					// it will resolve normally (with ok status set to false)
+					if (response.status >= 200 && response.status < 300) {
+						return Promise.resolve(response)
+					}
+	
+					return Promise.reject(new Error(response.statusText))
+				})
+				.then((response) => response.json()) // parses response to JSON
+				.then((result) => {
+					let tempDiv = document.createElement('div')
+					tempDiv.innerHTML = result['parse']['text']
+					const skillInfo = tempDiv.querySelectorAll('th+td')
+					const spans = document.querySelectorAll('.pup>span')
+					spans[0].innerText = skillInfo[0].innerText
+					spans[1].innerText = skillInfo[1].innerText
+				})
+				.catch((error) => {
+					// common error
+					if (error.name === 'AbortError') {
+						console.warn(`mouseleave --- cancel current request`)
+					}else{
+						console.log(`something wrong ${error}`);
+					}
+					return null
+				})
+		})
+	}
 }
