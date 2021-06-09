@@ -1,5 +1,5 @@
 # mw_script
-media wiki script test
+media wiki script for nga maplestory wiki
 
 working..
 
