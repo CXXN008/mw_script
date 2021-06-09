@@ -190,7 +190,7 @@ for (const e of a) {
 			currentSignal = controller
 	
 			nhpup.popup(`<img src=${ele.target.src}></img><b>${ele.target.parentNode.getAttribute('h-title')}<br/></b><span><br/></span><hr/><span>Loading ...</span>`)
-			const link = ele.target.parentNode.href.split('/')
+			const link = ele.target.parentNode.href.split('maplestory/')
 			const pageName = decodeURI(link[link.length - 1])
 			const data = {
 				action: 'parse',
