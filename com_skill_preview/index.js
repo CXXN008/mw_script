@@ -9,7 +9,7 @@ style.innerHTML = `
 	border: 1px solid white;
 	color: white;
 	background-color: #000000c0;
-	font-size: 0.95em;
+	font-size: 0.75em;
 	border-radius:10px;
 	text-align: top;
 	vertical-align: center;
@@ -226,8 +226,8 @@ for (const e of a) {
 					tempDiv.innerHTML = result['parse']['text']
 					const skillInfo = tempDiv.querySelectorAll('th+td')
 					const spans = document.querySelectorAll('.pup>span')
-					spans[0].innerText = skillInfo[0].innerText
-					spans[1].innerText = skillInfo[1].innerText
+					spans[0].innerHTML = skillInfo[0].innerHTML
+					spans[1].innerHTML = skillInfo[1].innerHTML
 				})
 				.catch((error) => {
 					// common error
